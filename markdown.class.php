@@ -92,7 +92,7 @@ class Markdown{
         
         //a footnote
         if(preg_match_all('#\[\^(.*?)\]#is', $doc, $footnotes)) {
-            $footnoteTpl = '<a href="#fn:%s" id="fnref:%s" title="查看注脚" class="footnote">[%s]</a>';
+            $footnoteTpl = '<a href="#fn:%s" id="fnref:%s" title="go to footnote" class="footnote">[%s]</a>';
             $footnoteReplaced = array();
             foreach($footnotes[0] as $key => $value) {
                 $footnoteId = $footnotes[1][$key];
@@ -101,7 +101,7 @@ class Markdown{
                 $footnoteReplaced[$footnoteId] = true;
                 $index            = $key+1;
                 $footnoteHash     = sprintf('<span id="fn:%s">[%s] </span>', $footnoteId, $index);
-                $footnoteBack     = sprintf('<a class="reversefootnote" title="回到文稿" href="#fnref:%s"><-</a><br>', $footnoteId);
+                $footnoteBack     = sprintf('<a class="reversefootnote" title="go back to content" href="#fnref:%s"><-</a><br>', $footnoteId);
                 //match footnote by id
                 if(preg_match(sprintf('#(\n)\[\^%s\]: (.*?)(?=\n)#is', $footnoteId), $doc, $footnote)) {
                     //footnote link
