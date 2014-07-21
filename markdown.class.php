@@ -76,7 +76,7 @@ class Markdown{
         }
         
         //img
-        $doc = preg_replace('#!\[([^\]]*?)\]\(([^\s]*?)(?: "([^"]*?)")?\)(\n)#is', '<img src="\2" alt="\1" title="\3" />\4', $doc);
+        $doc = preg_replace('#!\[([^\]]*?)\]\(([^\s]*?)(?: "([^"]*?)")?\)#is', '<img src="\2" alt="\1" title="\3" />', $doc);
         
         //a normal
         if(preg_match_all('#\[([^\]]*?)\]\[(\d+)\]#is', $doc, $links)) {
