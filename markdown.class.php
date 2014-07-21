@@ -78,6 +78,14 @@ class Markdown{
         //img
         $doc = preg_replace('#!\[([^\]]*?)\]\(([^\s]*?)(?: "([^"]*?)")?\)#is', '<img src="\2" alt="\1" title="\3" />', $doc);
         
+        //a simple
+        if(preg_match_all('#\[([^\]]*?)\]\(([^\s]*?)(?:\s"([^"]*?)")?\)#is', $doc, $links)) {
+            $linkTpl             = '<a target="_blank" href="%s" title="%s">%s</a>';
+            foreach($links[0] as $key => $value) {
+                $doc = str_replace($links[0][$key], sprintf($linkTpl, $links[2][$key], $links[3][$key], $links[1][$key]), $doc);
+            }
+        }
+        
         //a normal
         if(preg_match_all('#\[([^\]]*?)\]\[(\d+)\]#is', $doc, $links)) {
             $linkTpl             = '<a target="_blank" href="%s">%s</a>';
